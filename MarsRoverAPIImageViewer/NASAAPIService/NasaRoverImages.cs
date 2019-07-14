@@ -11,10 +11,10 @@ namespace NasaAPIService
     //
     //    using NasaAPIService;
     //
-    //    var welcome = Welcome.FromJson(jsonString);
+    //    var welcome = NasaRoverImages.FromJson(jsonString);
 
 
-    public partial class NasaRoverPhotos
+    public partial class NasaRoverImages
     {
         [JsonProperty("photos")]
         public Photo[] Photos { get; set; }
@@ -103,14 +103,14 @@ namespace NasaAPIService
 
     public enum Status { Active };
 
-    public partial class NasaRoverPhotos
+    public partial class NasaRoverImages
     {
-        public static NasaRoverPhotos FromJson(string json) => JsonConvert.DeserializeObject<NasaRoverPhotos>(json, Converter.Settings);
+        public static NasaRoverImages FromJson(string json) => JsonConvert.DeserializeObject<NasaRoverImages>(json, Converter.Settings);
     }
 
     public static class Serialize
     {
-        public static string ToJson(this NasaRoverPhotos self) => JsonConvert.SerializeObject(self, Converter.Settings);
+        public static string ToJson(this NasaRoverImages self) => JsonConvert.SerializeObject(self, Converter.Settings);
     }
 
     internal static class Converter

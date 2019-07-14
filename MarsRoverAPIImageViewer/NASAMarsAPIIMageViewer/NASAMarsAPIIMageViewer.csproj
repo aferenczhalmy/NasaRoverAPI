@@ -97,5 +97,11 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NASAAPIService\NasaAPIService.csproj">
+      <Project>{292ead16-d0a1-4556-b196-86b48d96749a}</Project>
+      <Name>NasaAPIService</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

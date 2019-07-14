@@ -24,5 +24,12 @@ namespace NASAMarsAPIIMageViewer
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var roverApi = new RoverAPI();
+            var imageDate = new FormattedDate("02/27/17");
+            var imageList = await roverApi.SaveRoverImages(imageDate);
+        }
     }
 }
