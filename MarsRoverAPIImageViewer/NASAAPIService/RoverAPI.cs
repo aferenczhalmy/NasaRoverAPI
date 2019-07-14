@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace NasaAPIService
 {
-    public class RoverAPI
+    public class RoverApi : IRoverApi
     {
-        public string GetImagesJson(FormattedDate formattedDate)
+        public string EndPoint { get; set; }
+        public RoverApi(string endPoint)
         {
-            var endPoint = $"https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={formattedDate.FormattedDateString}&api_key=DEMO_KEY";
+            EndPoint = endPoint;
+        }
+        public virtual string GetImagesJson(FormattedDate formattedDate)
+        {
+            var endPoint = string.Format(EndPoint, formattedDate.FormattedDateString);
             var result = "";
 
             var request = (HttpWebRequest)WebRequest.Create(endPoint);
