@@ -3,34 +3,40 @@ using System.IO;
 using Xunit;
 using NasaAPIService;
 using Microsoft.Extensions.Configuration;
+using Utilities;
 
 namespace Tests
 {
     public class ServiceTest1
     {
-        readonly string _path = @"..\..\..\..\..\MarsRoverAPIImageViewer\NASAAPIService\dates.txt";
+        public string Path { get; set; }
+        public string EndPoint { get; set; }
+        //readonly string _path = @;
         readonly FormattedDate _imageDate = new FormattedDate("02/27/17");
 
-        private string GetEndPoint()
+        private void SetupConfiguration()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
             IConfiguration configuration = builder.Build();
-            return configuration.GetSection("EndPoint").Value;
+            Path = configuration.GetSection("TestDateFile").Value;
+            EndPoint = configuration.GetSection("EndPoint").Value;
         }
 
         public IRoverApi GetRoverApi()
         {
+            SetupConfiguration();
             var isTest = true;
-            return isTest ? new RoverTestApi(GetEndPoint()) : new RoverApi(GetEndPoint());
+            return isTest ? new RoverTestApi(EndPoint) : new RoverApi(EndPoint);
         }
 
         [Fact]
         public void ReadDataInputFile()
         {
-            var dates = DateReader.ReadDates(_path);
+            SetupConfiguration();
+            var dates = DateReader.ReadDates(Path);
             Assert.True(dates.Count == 4);
             Assert.True(dates[0] == "02/27/17");
             Assert.True(dates[1] == "June 2, 2018");
@@ -41,7 +47,8 @@ namespace Tests
         [Fact]
         public void TestDateInputs()
         {
-            var dates = DateReader.ReadDates(_path);
+            SetupConfiguration();
+            var dates = DateReader.ReadDates(Path);
 
             var date1 = new FormattedDate(dates[0]);
             Assert.True(date1.FormattedDateString == "2017-02-27");

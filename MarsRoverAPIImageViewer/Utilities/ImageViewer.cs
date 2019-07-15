@@ -2,7 +2,7 @@
 using System.IO;
 using System.Diagnostics;
 
-namespace NasaAPIService
+namespace Utilities
 {
     public static class ImageViewer
     {
