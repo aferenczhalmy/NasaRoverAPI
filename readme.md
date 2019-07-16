@@ -10,7 +10,7 @@ Solution is broken into multiple projects:
 
 ## Configuration
 
-the NasaAPIService contains an appsettings.json with a few configuration settings that include:
+The NasaAPIService project contains an appsettings.json with a few configuration settings that include:
 
 - the Nasa Rover API Endpoint
 - boolean switch to toggle for testing so you can run tests without exceeding the request limit on the API.  **To run against the service, IsTest needs to be set to false.**
