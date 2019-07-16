@@ -69,6 +69,8 @@ namespace NASAMarsAPIIMageViewer
             var localFilePathAndName = roverAPI.SaveRoverImage(FormattedDate, roverImages.Photos[randomImageIndex]);
             var randomImage = roverImages.Photos[randomImageIndex].ImgSrc.ToString();
 
+            SaveLocation.Text = "Image saved to - " + localFilePathAndName;
+
             ImageViewer.SelectAndShowImage(randomImage);
         }
 
@@ -83,6 +85,7 @@ namespace NASAMarsAPIIMageViewer
             {
                 MessageBox.Show($"The date {DatesCmb.SelectedItem} is invalid, please choose a valid date");
                 GetImageBtn.IsEnabled = false;
+                SaveLocation.Text = "";
             }
         }
     }
