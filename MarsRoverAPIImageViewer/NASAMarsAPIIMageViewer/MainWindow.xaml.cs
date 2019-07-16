@@ -40,6 +40,7 @@ namespace NASAMarsAPIIMageViewer
             var dates = DateReader.ReadDates(DateFile).ToList();
             dates.ForEach(d => items.Add(d));
             DatesCmb.ItemsSource = items;
+            GetImageBtn.IsEnabled = false;
 
         }
 
